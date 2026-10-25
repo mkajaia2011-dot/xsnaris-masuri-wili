@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ანტიგრავიტაციული ქიმიური ლაბორატორია: მასური წილი</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BPG+Banner+Trial:wght@400;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f3ff;
+            --primary-glow: rgba(0, 243, 255, 0.4);
+            --secondary: #7000ff;
+            --secondary-glow: rgba(112, 0, 255, 0.4);
+            --accent: #ff007f;
+            --accent-glow: rgba(255, 0, 127, 0.4);
+            --bg-dark: #050b14;
+            --bg-card: rgba(13, 27, 42, 0.82);
+            --bg-card-hover: rgba(18, 36, 56, 0.92);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: rgba(0, 243, 255, 0.25);
+            --border-hover: rgba(0, 243, 255, 0.65);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans Georgian', 'BPG Banner Trial', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.04) 0%, transparent 60%);
+        }
+
+        /* Floating background particles (Anti-gravity effect) */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #00f3ff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #7000ff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 150px 160px, #ff007f, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 180px 90px, #00f3ff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.35;
+            animation: floatSpace 24s linear infinite;
+        }
+
+        @keyframes floatSpace {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2.2rem 1.8rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 0 35px rgba(0, 243, 255, 0.12), inset 0 0 20px rgba(0, 243, 255, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+            animation: sweepLight 5s linear infinite;
+        }
+
+        @keyframes sweepLight {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        header h1 {
+            font-size: 2.35rem;
+            background: linear-gradient(135deg, #00f3ff 20%, #d946ef 60%, #ff007f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.12rem;
+            max-width: 820px;
+            margin: 0 auto 1.25rem;
+            line-height: 1.6;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .sound-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sound-toggle-btn:hover {
+            background: rgba(0, 243, 255, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Section Cards */
+        .section-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 2.2rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+            animation: floatCard 7s ease-in-out infinite alternate;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .section-box:hover {
+            border-color: var(--border-hover);
+        }
+
+        .section-box:nth-child(even) {
+            animation-delay: 3.5s;
+        }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+
+        h2 {
+            font-size: 1.55rem;
+            color: var(--primary);
+            margin-bottom: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+        }
+
+        h2 i {
+            font-size: 1.4rem;
+            color: var(--accent);
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+        }
+
+        .formula-pill {
+            display: inline-block;
+            background: rgba(0, 243, 255, 0.12);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.2rem;
+            align-items: start;
+        }
+
+        @media(max-width: 900px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            .formula-pill {
+                margin-left: 0;
+                margin-top: 8px;
+            }
+            h2 {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Anti-Gravity Lab Container */
+        .lab-container {
+            position: relative;
+            min-height: 440px;
+            background: radial-gradient(circle at 50% 60%, rgba(0, 243, 255, 0.08) 0%, rgba(5, 11, 20, 0.9) 80%);
+            border-radius: 20px;
+            border: 1px dashed var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+            padding: 20px 10px;
+        }
+
+        .ag-field {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            animation: pulseField 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .ag-field:nth-child(2) {
+            width: 320px;
+            height: 320px;
+            border-color: rgba(112, 0, 255, 0.15);
+            animation-duration: 6s;
+            animation-delay: -2s;
+        }
+
+        @keyframes pulseField {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+            50% { transform: scale(1.08) rotate(180deg); opacity: 0.8; }
+        }
+
+        .flask-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            animation: antiGravityFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes antiGravityFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-16px) rotate(1.5deg); }
+        }
+
+        .flask-neck {
+            width: 38px;
+            height: 48px;
+            border: 3px solid var(--primary);
+            border-bottom: none;
+            background: rgba(0, 243, 255, 0.08);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+        }
+
+        .flask-neck::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -6px;
+            width: 44px;
+            height: 5px;
+            background: var(--primary);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .flask {
+            width: 170px;
+            height: 200px;
+            border: 3px solid var(--primary);
+            border-top: none;
+            border-radius: 0 0 85px 85px;
+            position: relative;
+            background: rgba(0, 243, 255, 0.04);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2), inset 0 0 20px rgba(0, 243, 255, 0.08);
+            overflow: hidden;
+            margin-top: -1px;
+        }
+
+        .liquid {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0, 243, 255, 0.75), rgba(112, 0, 255, 0.5));
+            transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0 0 82px 82px;
+            overflow: hidden;
+        }
+
+        .meniscus {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 12px;
+            background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.5), transparent);
+            border-top: 2px solid rgba(255, 255, 255, 0.8);
+            animation: liquidWave 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes liquidWave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-30px); }
+        }
+
+        .ion-particle {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+            padding: 2px 4px;
+            border-radius: 8px;
+            pointer-events: none;
+            animation: ionDrift 4s ease-in-out infinite alternate;
+            text-shadow: 0 0 6px rgba(0, 243, 255, 0.8);
+            z-index: 4;
+        }
+
+        @keyframes ionDrift {
+            0% { transform: translate(0, 0) scale(0.9); opacity: 0.6; }
+            100% { transform: translate(12px, -18px) scale(1.1); opacity: 0.95; }
+        }
+
+        .flask-marks {
+            position: absolute;
+            right: 12px;
+            top: 20px;
+            bottom: 30px;
+            width: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.6;
+        }
+
+        .tick {
+            height: 2px;
+            background: rgba(0, 243, 255, 0.7);
+            border-radius: 1px;
+        }
+        .tick.major { width: 14px; }
+        .tick.minor { width: 8px; }
+
+        .flask-readout {
+            margin-top: 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            color: var(--primary);
+            text-align: center;
+            background: rgba(0, 243, 255, 0.08);
+            border: 1px solid var(--border);
+            padding: 6px 18px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+
+        .flask-status-pill {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 30px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stat-banner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+
+        .stat-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat-val.highlight {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .stat-val.accent {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .control-group {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            padding: 18px;
+            transition: border-color 0.3s;
+        }
+
+        .control-group:hover {
+            border-color: var(--border);
+        }
+
+        .control-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .control-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-number-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-number-box input {
+            width: 75px;
+            background: rgba(5, 11, 20, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 5px 8px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .control-number-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .unit {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 12px var(--primary);
+            transition: transform 0.15s, background 0.15s;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: #fff;
+        }
+
+        .slider-accent::-webkit-slider-thumb {
+            background: var(--accent);
+            box-shadow: 0 0 12px var(--accent);
+        }
+
+        .preset-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .preset-title {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .preset-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-main);
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chip-btn:hover {
+            background: rgba(0, 243, 255, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .action-btns-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        @media(max-width: 600px) {
+            .action-btns-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 8px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-action i {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .btn-action:hover {
+            background: rgba(0, 243, 255, 0.15);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 243, 255, 0.2);
+        }
+
+        .formula-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .formula-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .fraction-display {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            font-size: 1.05rem;
+        }
+
+        .fraction-num {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 3px;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .fraction-den {
+            padding-top: 3px;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Section 2: Magic Triangle */
+        .triangle-solver-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media(max-width: 820px) {
+            .triangle-solver-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .triangle-visual-box {
+            position: relative;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .svg-triangle {
+            width: 250px;
+            height: 230px;
+        }
+
+        .tri-node {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tri-node:hover circle {
+            fill: rgba(0, 243, 255, 0.3);
+            stroke-width: 3;
+        }
+
+        .tri-node.active circle {
+            fill: rgba(255, 0, 127, 0.35);
+            stroke: var(--accent);
+            stroke-width: 3.5;
+            filter: drop-shadow(0 0 10px var(--accent-glow));
+        }
+
+        .tri-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tri-tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-muted);
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tri-tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .solver-inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .input-block {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-block label {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .input-block input {
+            background: rgba(5, 11, 20, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-block input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .solution-step-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 14px 14px 0;
+            padding: 16px 20px;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ================= EXPERIMENT STYLES (SECTIONS 3 & 4) ================= */
+        .experiment-card {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media(max-width: 950px) {
+            .experiment-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Vessel Stages */
+        .vessel-stage {
+            position: relative;
+            height: 380px;
+            background: radial-gradient(circle at 50% 60%, rgba(0, 243, 255, 0.05) 0%, rgba(5, 11, 20, 0.95) 85%);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.7);
+        }
+
+        /* Beaker Glass Base */
+        .lab-beaker {
+            position: relative;
+            border: 3px solid var(--primary);
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            background: rgba(0, 243, 255, 0.04);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .lab-beaker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -4px;
+            width: 8px;
+            height: 4px;
+            border-top: 3px solid var(--primary);
+            border-left: 3px solid var(--primary);
+            border-radius: 4px 0 0 0;
+        }
+
+        .beaker-liquid {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1), background 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0 0 17px 17px;
+        }
+
+        .beaker-liquid-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+            text-shadow: 0 0 6px rgba(0,0,0,0.8);
+            text-align: center;
+            padding: 2px 4px;
+        }
+
+        /* Dilution Stage Elements */
+        .dilution-beaker {
+            width: 140px;
+            height: 180px;
+            z-index: 2;
+        }
+
+        .pouring-flask {
+            position: absolute;
+            top: 40px;
+            right: 45px;
+            width: 80px;
+            height: 110px;
+            border: 3px solid #38bdf8;
+            border-top: none;
+            border-radius: 0 0 40px 40px;
+            background: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+            transform-origin: top left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 4;
+        }
+
+        .pouring-flask::before {
+            content: '';
+            position: absolute;
+            top: -24px;
+            left: 26px;
+            width: 22px;
+            height: 24px;
+            border: 3px solid #38bdf8;
+            border-bottom: none;
+            background: rgba(56, 189, 248, 0.15);
+        }
+
+        .pouring-flask.pouring {
+            transform: rotate(-65deg) translate(-20px, 15px);
+        }
+
+        .water-stream {
+            position: absolute;
+            top: 140px;
+            right: 155px;
+            width: 5px;
+            height: 0px;
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0.9), rgba(0, 243, 255, 0.6));
+            box-shadow: 0 0 10px #38bdf8;
+            border-radius: 3px;
+            opacity: 0;
+            transition: height 0.4s ease, opacity 0.2s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .water-stream.active {
+            height: 110px;
+            opacity: 1;
+        }
+
+        /* Mixing Stage Elements */
+        .mixing-stage {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 20px;
+            padding-bottom: 25px;
+        }
+
+        .mix-source-beaker {
+            width: 80px;
+            height: 110px;
+            border-radius: 0 0 15px 15px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            top: 40px;
+            z-index: 4;
+        }
+
+        .mix-source-beaker.left {
+            left: 45px;
+            border-color: var(--accent);
+            background: rgba(255, 0, 127, 0.08);
+            transform-origin: top right;
+        }
+
+        .mix-source-beaker.right {
+            right: 45px;
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.08);
+            transform-origin: top left;
+        }
+
+        .mix-source-beaker.left.pouring {
+            transform: rotate(55deg) translate(25px, 20px);
+        }
+
+        .mix-source-beaker.right.pouring {
+            transform: rotate(-55deg) translate(-25px, 20px);
+        }
+
+        .stream-mix-left {
+            position: absolute;
+            top: 145px;
+            left: 150px;
+            width: 5px;
+            height: 0;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+            opacity: 0;
+            transition: height 0.4s ease, opacity 0.2s ease;
+            z-index: 3;
+        }
+
+        .stream-mix-right {
+            position: absolute;
+            top: 145px;
+            right: 150px;
+            width: 5px;
+            height: 0;
+            background: #38bdf8;
+            box-shadow: 0 0 10px #38bdf8;
+            opacity: 0;
+            transition: height 0.4s ease, opacity 0.2s ease;
+            z-index: 3;
+        }
+
+        .stream-mix-left.active, .stream-mix-right.active {
+            height: 110px;
+            opacity: 1;
+        }
+
+        .mix-target-beaker {
+            width: 150px;
+            height: 170px;
+            border-color: var(--primary);
+            z-index: 2;
+        }
+
+        /* Student Workspace Box */
+        .student-solve-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .task-prompt-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 14px 14px 0;
+            padding: 16px 20px;
+            line-height: 1.6;
+        }
+
+        .task-prompt-box strong {
+            color: #fff;
+        }
+
+        .student-inputs-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media(max-width: 550px) {
+            .student-inputs-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .field-label {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .student-input-wrap {
+            display: flex;
+            align-items: center;
+            background: rgba(5, 11, 20, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .student-input-wrap:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .student-input-wrap input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            font-weight: 700;
+            outline: none;
+        }
+
+        .student-input-wrap .field-unit {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+
+        .interactive-btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 243, 255, 0.25);
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 243, 255, 0.4);
+        }
+
+        .btn-random {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-random:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .feedback-card {
+            display: none;
+            padding: 16px 20px;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .feedback-card.correct {
+            display: block;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--success);
+            color: #a7f3d0;
+        }
+
+        .feedback-card.wrong {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--danger);
+            color: #fecaca;
+        }
+
+        /* Section 5: Quiz & Challenge */
+        .quiz-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .quiz-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .quiz-progress-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .progress-bar-bg {
+            width: 160px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 16%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.4s ease;
+        }
+
+        .quiz-score-badge {
+            background: rgba(0, 243, 255, 0.12);
+            border: 1px solid var(--border);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .question-card {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 24px;
+        }
+
+        .question-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .quiz-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media(max-width: 650px) {
+            .quiz-options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--text-main);
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover:not(.disabled) {
+            background: rgba(0, 243, 255, 0.12);
+            border-color: var(--primary);
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .option-btn.correct {
+            background: rgba(16, 185, 129, 0.2) !important;
+            border-color: var(--success) !important;
+            color: #fff !important;
+        }
+
+        .option-btn.wrong {
+            background: rgba(239, 68, 68, 0.2) !important;
+            border-color: var(--danger) !important;
+            color: #fff !important;
+        }
+
+        .option-marker {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            flex-shrink: 0;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-feedback.correct-box {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--success);
+            color: #a7f3d0;
+            display: block;
+        }
+
+        .quiz-feedback.wrong-box {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--danger);
+            color: #fecaca;
+            display: block;
+        }
+
+        .quiz-nav-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .btn-quiz-next {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-quiz-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 3rem;
+        }
+
+        footer strong {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Anti-gravity floating cosmic background -->
+    <div class="stars"></div>
+
+    <div class="container">
+        <!-- Main Header -->
+        <header>
+            <div class="header-badge">
+                <i class="fa-solid fa-atom"></i> ქიმიის ვირტუალური ლაბორატორია
+            </div>
+            <h1>ანტიგრავიტაციული ქიმიური ლაბორატორია: მასური წილი</h1>
+            <p>გახსნილი ნივთიერების მასური წილის (<strong>&omega;</strong>) ინტერაქტიული გამოთვლა, ნულოვანი გრავიტაციის სიმულატორი, წყლის დამატებით განზავება, ხსნარების შერევა და პრაქტიკული ამოცანების ტრენაჟორი მოსწავლეთათვის.</p>
+            <div class="header-actions">
+                <button class="sound-toggle-btn" id="soundBtn" onclick="toggleSound()">
+                    <i class="fa-solid fa-volume-high"></i> <span id="soundLabel">ხმა: ჩართულია</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- SECTION 1: ANTI-GRAVITY SIMULATOR -->
+        <section class="section-box">
+            <h2>
+                <i class="fa-solid fa-flask-vial"></i> 1. ანტიგრავიტაციული კოლბა და მასური წილის სიმულატორი
+                <span class="formula-pill">&omega; = [m(ნივთ) / m(ხსნ)] &times; 100%</span>
+            </h2>
+            
+            <div class="grid-layout">
+                <!-- Visual Anti-gravity Flask -->
+                <div class="lab-container">
+                    <div class="ag-field"></div>
+                    <div class="ag-field"></div>
+
+                    <div class="flask-wrapper">
+                        <div class="flask-neck"></div>
+                        <div class="flask">
+                            <!-- Tick Marks -->
+                            <div class="flask-marks">
+                                <div class="tick major"></div>
+                                <div class="tick minor"></div>
+                                <div class="tick major"></div>
+                                <div class="tick minor"></div>
+                                <div class="tick major"></div>
+                                <div class="tick minor"></div>
+                                <div class="tick major"></div>
+                            </div>
+
+                            <!-- Dynamic Liquid -->
+                            <div class="liquid" id="flaskLiquid">
+                                <div class="meniscus"></div>
+                                <div class="ion-particle" style="top: 20%; left: 30%;">Na⁺</div>
+                                <div class="ion-particle" style="top: 50%; left: 60%; animation-delay: -1s;">Cl⁻</div>
+                                <div class="ion-particle" style="top: 70%; left: 25%; animation-delay: -2s;">H₂O</div>
+                                <div class="ion-particle" style="top: 35%; left: 70%; animation-delay: -1.5s;">Na⁺</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flask-readout">
+                        &omega; = <strong id="readoutOmega">10.00%</strong>
+                    </div>
+                    <div class="flask-status-pill" id="readoutStatus" style="background: rgba(16, 185, 129, 0.25); border: 1px solid var(--success);">
+                        ზომიერად განზავებული ხსნარი
+                    </div>
+                </div>
+
+                <!-- Interactive Controls -->
+                <div class="controls-panel">
+                    <!-- Real-time Stats Cards -->
+                    <div class="stat-banner">
+                        <div class="stat-item">
+                            <div class="stat-label">m(ნივთ)</div>
+                            <div class="stat-val accent" id="statSolute">20 გრ</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">m(წყალი)</div>
+                            <div class="stat-val" id="statWater">180 გრ</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">m(ხსნარი)</div>
+                            <div class="stat-val highlight" id="statTotal">200 გრ</div>
+                        </div>
+                    </div>
+
+                    <!-- Slider 1: Solute Mass -->
+                    <div class="control-group">
+                        <div class="control-header">
+                            <span class="control-title">
+                                <i class="fa-solid fa-cube" style="color: var(--accent);"></i>
+                                გახსნილი ნივთიერების მასა m(ნივთ):
+                            </span>
+                            <div class="control-number-box">
+                                <input type="number" id="numSolute" min="0" max="150" step="1" value="20" oninput="syncSolute(this.value)">
+                                <span class="unit">გრ</span>
+                            </div>
+                        </div>
+                        <input type="range" class="range-slider slider-accent" id="rangeSolute" min="0" max="150" step="1" value="20" oninput="syncSolute(this.value)">
+                    </div>
+
+                    <!-- Slider 2: Water Mass -->
+                    <div class="control-group">
+                        <div class="control-header">
+                            <span class="control-title">
+                                <i class="fa-solid fa-droplet" style="color: var(--primary);"></i>
+                                გამხსნელის (წყლის) მასა m(წყალი):
+                            </span>
+                            <div class="control-number-box">
+                                <input type="number" id="numWater" min="20" max="500" step="5" value="180" oninput="syncWater(this.value)">
+                                <span class="unit">გრ (მლ)</span>
+                            </div>
+                        </div>
+                        <input type="range" class="range-slider" id="rangeWater" min="20" max="500" step="5" value="180" oninput="syncWater(this.value)">
+                    </div>
+
+                    <!-- Action Presets -->
+                    <div class="preset-container">
+                        <span class="preset-title"><i class="fa-solid fa-bookmark"></i> რეალური ხსნარების პრესეტები:</span>
+                        <div class="preset-chips">
+                            <button class="chip-btn" onclick="applyPreset(0.9, 100, 'ფიზიოლოგიური ხსნარი (NaCl)')">💉 ფიზ. ხსნარი 0.9%</button>
+                            <button class="chip-btn" onclick="applyPreset(5, 100, 'სუფრის ძმარი (5%)')">🥗 ძმარი 5%</button>
+                            <button class="chip-btn" onclick="applyPreset(9, 100, 'კონცენტრირებული ძმარი (9%)')">🍶 ძმარი 9%</button>
+                            <button class="chip-btn" onclick="applyPreset(3.5, 100, 'ზღვის წყალი')">🌊 ზღვის წყალი 3.5%</button>
+                            <button class="chip-btn" onclick="applyPreset(20, 100, 'შაქრის სიროფი')">🍬 სიროფი 20%</button>
+                            <button class="chip-btn" onclick="applyPreset(26.4, 100, 'გაჯერებული მარილი')">🧂 ნაჯერი მარილი 26.4%</button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Lab Actions -->
+                    <div class="action-btns-grid">
+                        <button class="btn-action" onclick="addWater(50)">
+                            <i class="fa-solid fa-faucet-drip"></i>
+                            <span>+50 მლ წყალი</span>
+                        </button>
+                        <button class="btn-action" onclick="addSolute(10)">
+                            <i class="fa-solid fa-plus-minus"></i>
+                            <span>+10 გრ ნივთ.</span>
+                        </button>
+                        <button class="btn-action" onclick="evaporateWater(50)">
+                            <i class="fa-solid fa-fire-burner"></i>
+                            <span>-50 მლ აორთქლ.</span>
+                        </button>
+                        <button class="btn-action" onclick="resetSim()">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span>გადატვირთვა</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Calculation Formula Card -->
+            <div class="formula-card">
+                <div class="formula-row">
+                    <span>&omega; =</span>
+                    <div class="fraction-display">
+                        <span class="fraction-num">m(ნივთიერება)</span>
+                        <span class="fraction-den">m(ხსნარი)</span>
+                    </div>
+                    <span>&times; 100% &nbsp;=&nbsp;</span>
+                    <div class="fraction-display">
+                        <span class="fraction-num" id="fNumVal">20 გრ</span>
+                        <span class="fraction-den" id="fDenVal">200 გრ</span>
+                    </div>
+                    <span>&times; 100% &nbsp;=&nbsp;</span>
+                    <span style="color: var(--primary); font-family: 'JetBrains Mono', monospace;" id="fResVal">10.00%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: FORMULA TRIANGLE & SOLVER -->
+        <section class="section-box">
+            <h2>
+                <i class="fa-solid fa-shapes"></i> 2. ფორმულის სამკუთხედი და ეტაპობრივი ამოხსნა
+            </h2>
+            
+            <div class="triangle-solver-grid">
+                <!-- SVG Interactive Triangle -->
+                <div class="triangle-visual-box">
+                    <svg class="svg-triangle" viewBox="0 0 260 220">
+                        <polygon points="130,20 20,200 240,200" fill="rgba(0, 243, 255, 0.05)" stroke="var(--primary)" stroke-width="2.5" stroke-linejoin="round"/>
+                        <line x1="60" y1="125" x2="200" y2="125" stroke="var(--primary)" stroke-width="2.5" stroke-dasharray="4,4"/>
+                        <line x1="130" y1="125" x2="130" y2="200" stroke="var(--primary)" stroke-width="2.5" stroke-dasharray="4,4"/>
+
+                        <!-- Top node: m(ნივთ) -->
+                        <g class="tri-node active" id="nodeTop" onclick="switchTriTab('omega')">
+                            <circle cx="130" cy="70" r="30" fill="rgba(112, 0, 255, 0.2)" stroke="var(--primary)" stroke-width="2"/>
+                            <text x="130" y="68" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle" font-family="'JetBrains Mono', monospace">m(ნივთ)</text>
+                            <text x="130" y="84" fill="var(--text-muted)" font-size="10" text-anchor="middle">მასა (გრ)</text>
+                        </g>
+
+                        <!-- Bottom left node: omega -->
+                        <g class="tri-node" id="nodeLeft" onclick="switchTriTab('solute')">
+                            <circle cx="75" cy="165" r="28" fill="rgba(0, 243, 255, 0.15)" stroke="var(--primary)" stroke-width="2"/>
+                            <text x="75" y="163" fill="#fff" font-size="15" font-weight="bold" text-anchor="middle" font-family="'JetBrains Mono', monospace">&omega;</text>
+                            <text x="75" y="178" fill="var(--text-muted)" font-size="10" text-anchor="middle">წილი (%)</text>
+                        </g>
+
+                        <!-- Bottom right node: m(ხსნარი) -->
+                        <g class="tri-node" id="nodeRight" onclick="switchTriTab('solution')">
+                            <circle cx="185" cy="165" r="28" fill="rgba(0, 243, 255, 0.15)" stroke="var(--primary)" stroke-width="2"/>
+                            <text x="185" y="163" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle" font-family="'JetBrains Mono', monospace">m(ხსნ)</text>
+                            <text x="185" y="178" fill="var(--text-muted)" font-size="10" text-anchor="middle">ხსნარი (გრ)</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Solver Calculator Panel -->
+                <div class="triangle-content">
+                    <div class="tri-tabs">
+                        <button class="tri-tab-btn active" id="tabOmega" onclick="switchTriTab('omega')">1. &omega;-ს პოვნა (%)</button>
+                        <button class="tri-tab-btn" id="tabSolute" onclick="switchTriTab('solute')">2. m(ნივთ)-ის პოვნა (გრ)</button>
+                        <button class="tri-tab-btn" id="tabSolution" onclick="switchTriTab('solution')">3. m(ხსნ)-ის პოვნა (გრ)</button>
+                    </div>
+
+                    <!-- Mode 1: Find Omega -->
+                    <div id="modeOmega" class="solver-mode">
+                        <div class="solver-inputs-grid">
+                            <div class="input-block">
+                                <label>m(გახსნილი ნივთიერება) [გრ]:</label>
+                                <input type="number" id="inSolute1" value="15" oninput="solveTriangle()">
+                            </div>
+                            <div class="input-block">
+                                <label>m(წყალი) [გრ ან მლ]:</label>
+                                <input type="number" id="inWater1" value="135" oninput="solveTriangle()">
+                            </div>
+                        </div>
+                        <div class="solution-step-card" id="stepResult1"></div>
+                    </div>
+
+                    <!-- Mode 2: Find Solute -->
+                    <div id="modeSolute" class="solver-mode" style="display: none;">
+                        <div class="solver-inputs-grid">
+                            <div class="input-block">
+                                <label>m(სასურველი ხსნარი) [გრ]:</label>
+                                <input type="number" id="inSolution2" value="250" oninput="solveTriangle()">
+                            </div>
+                            <div class="input-block">
+                                <label>მასური წილი &omega; [%]:</label>
+                                <input type="number" id="inOmega2" value="8" oninput="solveTriangle()">
+                            </div>
+                        </div>
+                        <div class="solution-step-card" id="stepResult2"></div>
+                    </div>
+
+                    <!-- Mode 3: Find Solution / Water -->
+                    <div id="modeSolution" class="solver-mode" style="display: none;">
+                        <div class="solver-inputs-grid">
+                            <div class="input-block">
+                                <label>m(გახსნილი ნივთიერება) [გრ]:</label>
+                                <input type="number" id="inSolute3" value="40" oninput="solveTriangle()">
+                            </div>
+                            <div class="input-block">
+                                <label>საჭირო მასური წილი &omega; [%]:</label>
+                                <input type="number" id="inOmega3" value="20" oninput="solveTriangle()">
+                            </div>
+                        </div>
+                        <div class="solution-step-card" id="stepResult3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: DILUTION BY ADDING WATER -->
+        <section class="section-box">
+            <h2>
+                <i class="fa-solid fa-water"></i> 3. ხსნარის განზავება წყლის დამატებით
+                <span class="formula-pill">&omega;₁ &times; m₁ = &omega;₂ &times; m₂</span>
+            </h2>
+
+            <div class="experiment-card">
+                <!-- Visual Laboratory Dilution Vessel & Pouring Animation -->
+                <div class="vessel-stage">
+                    <!-- Pouring Water Flask (above & tilted) -->
+                    <div class="pouring-flask" id="dilutePourFlask">
+                        <div style="font-size: 11px; text-align: center; color: #fff; font-weight: bold; margin-top: 40px;">
+                            +H₂O
+                        </div>
+                    </div>
+
+                    <!-- Animated Water Stream -->
+                    <div class="water-stream" id="diluteStream"></div>
+
+                    <!-- Main Dilution Beaker -->
+                    <div class="lab-beaker dilution-beaker" id="diluteMainBeaker">
+                        <div class="beaker-liquid" id="diluteLiquid" style="height: 45%; background: linear-gradient(to top, rgba(255, 0, 127, 0.8), rgba(112, 0, 255, 0.6));">
+                            <span class="beaker-liquid-label" id="diluteBeakerLabel">m₁=200g, &omega;₁=20%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Solver & Manual Input Panel -->
+                <div class="student-solve-panel">
+                    <div class="task-prompt-box">
+                        <p style="margin-bottom: 6px;">
+                            <strong>🧪 ლაბორატორიული ამოცანა:</strong> ჭურჭელში ასხია <strong id="dilutePromptM1" style="color:var(--primary);">200 გრ</strong> მასის <strong id="dilutePromptW1" style="color:var(--accent);">20%-იანი</strong> ხსნარი. ჭურჭელს დაამატეს <strong id="dilutePromptWater" style="color:#38bdf8;">200 გრ</strong> სუფთა წყალი.
+                        </p>
+                        <p style="font-size: 0.92rem; color: var(--text-muted);">
+                            გამოთვალეთ მიღებული ახალი ხსნარის საერთო მასა (<strong>m₂</strong>) და ახალი მასური წილი (<strong>&omega;₂</strong>) ფორმულით <code>&omega;₁ &times; m₁ = &omega;₂ &times; m₂</code>:
+                        </p>
+                    </div>
+
+                    <div class="student-inputs-row">
+                        <div>
+                            <label class="field-label">1. ახალი ხსნარის მასა (m₂):</label>
+                            <div class="student-input-wrap">
+                                <input type="number" id="userDiluteM2" placeholder="შეიყვანეთ m₂">
+                                <span class="field-unit">გრ</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="field-label">2. ახალი მასური წილი (&omega;₂):</label>
+                            <div class="student-input-wrap">
+                                <input type="number" id="userDiluteW2" step="0.1" placeholder="შეიყვანეთ &omega;₂">
+                                <span class="field-unit">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive-btn-group">
+                        <button class="btn-check" onclick="checkDilutionTask()">
+                            <i class="fa-solid fa-play"></i> შემოწმება და წყლის ჩასხმა
+                        </button>
+                        <button class="btn-random" onclick="newDilutionTask()">
+                            <i class="fa-solid fa-shuffle"></i> ახალი რიცხვები (სავარჯიშო)
+                        </button>
+                        <button class="btn-random" onclick="toggleCustomDilution()">
+                            <i class="fa-solid fa-pen-to-square"></i> საკუთარი რიცხვების შეყვანა
+                        </button>
+                    </div>
+
+                    <!-- Custom input fields for user-defined task -->
+                    <div id="customDiluteBox" style="display: none; background: rgba(0,0,0,0.3); border: 1px dashed var(--border); padding: 14px; border-radius: 12px; margin-top: 5px;">
+                        <span style="font-size: 0.85rem; color: var(--primary); font-weight: bold; display: block; margin-bottom: 8px;">
+                            ⚙️ შეიყვანეთ თქვენი სასურველი საწყისი მონაცემები:
+                        </span>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                            <input type="number" id="custDiluteM1" placeholder="m₁ (გრ)" value="150" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #050b14; color: #fff;">
+                            <input type="number" id="custDiluteW1" placeholder="&omega;₁ (%)" value="12" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #050b14; color: #fff;">
+                            <input type="number" id="custDiluteWater" placeholder="+წყალი (გრ)" value="50" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #050b14; color: #fff;">
+                        </div>
+                        <button class="btn-check" style="margin-top: 10px; padding: 8px 16px; font-size: 0.85rem;" onclick="applyCustomDilution()">
+                            მონაცემების გამოყენება
+                        </button>
+                    </div>
+
+                    <div class="feedback-card" id="diluteFeedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: MIXING TWO SOLUTIONS -->
+        <section class="section-box">
+            <h2>
+                <i class="fa-solid fa-code-merge"></i> 4. ორი ხსნარის შერევა ლაბორატორიულ ჭურჭელში
+                <span class="formula-pill">&omega;₁m₁ + &omega;₂m₂ = &omega;₃m₃</span>
+            </h2>
+
+            <div class="experiment-card">
+                <!-- Visual Laboratory Mixing Stage with Two Pouring Beakers -->
+                <div class="vessel-stage mixing-stage">
+                    <!-- Left Source Beaker 1 -->
+                    <div class="lab-beaker mix-source-beaker left" id="mixSourceLeft">
+                        <div class="beaker-liquid" id="mixLiquidLeft" style="height: 70%; background: linear-gradient(to top, rgba(255, 0, 127, 0.85), rgba(255, 0, 127, 0.5));">
+                            <span class="beaker-liquid-label" style="font-size: 10px;">ხსნ. 1</span>
+                        </div>
+                    </div>
+                    <!-- Left Pouring Stream -->
+                    <div class="stream-mix-left" id="streamMixLeft"></div>
+
+                    <!-- Right Source Beaker 2 -->
+                    <div class="lab-beaker mix-source-beaker right" id="mixSourceRight">
+                        <div class="beaker-liquid" id="mixLiquidRight" style="height: 70%; background: linear-gradient(to top, rgba(0, 243, 255, 0.85), rgba(56, 189, 248, 0.5));">
+                            <span class="beaker-liquid-label" style="font-size: 10px;">ხსნ. 2</span>
+                        </div>
+                    </div>
+                    <!-- Right Pouring Stream -->
+                    <div class="stream-mix-right" id="streamMixRight"></div>
+
+                    <!-- Target Receiving Beaker 3 -->
+                    <div class="lab-beaker mix-target-beaker" id="mixTargetBeaker">
+                        <div class="beaker-liquid" id="mixTargetLiquid" style="height: 20%; background: rgba(255, 255, 255, 0.05);">
+                            <span class="beaker-liquid-label" id="mixTargetLabel" style="font-size: 11px;">ცარიელი</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Solver & Manual Input Panel -->
+                <div class="student-solve-panel">
+                    <div class="task-prompt-box">
+                        <p style="margin-bottom: 6px;">
+                            <strong>🧪 ლაბორატორიული ცდა:</strong> ერთმანეთს შეურიეს:
+                        </p>
+                        <p style="margin-bottom: 6px; font-size: 0.95rem;">
+                            &bull; <strong>1-ლი ხსნარი:</strong> მასა m₁ = <strong id="mixPromptM1" style="color:var(--accent);">100 გრ</strong>, მასური წილი &omega;₁ = <strong id="mixPromptW1" style="color:var(--accent);">10%</strong><br>
+                            &bull; <strong>მე-2 ხსნარი:</strong> მასა m₂ = <strong id="mixPromptM2" style="color:#38bdf8;">300 გრ</strong>, მასური წილი &omega;₂ = <strong id="mixPromptW2" style="color:#38bdf8;">30%</strong>
+                        </p>
+                        <p style="font-size: 0.92rem; color: var(--text-muted);">
+                            გამოთვალეთ ნარევის საერთო მასა (<strong>m₃</strong>) და საბოლოო მასური წილი (<strong>&omega;₃</strong>) ფორმულით <code>&omega;₁m₁ + &omega;₂m₂ = &omega;₃m₃</code>:
+                        </p>
+                    </div>
+
+                    <div class="student-inputs-row">
+                        <div>
+                            <label class="field-label">1. ნარევის საერთო მასა (m₃):</label>
+                            <div class="student-input-wrap">
+                                <input type="number" id="userMixM3" placeholder="შეიყვანეთ m₃">
+                                <span class="field-unit">გრ</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="field-label">2. საბოლოო მასური წილი (&omega;₃):</label>
+                            <div class="student-input-wrap">
+                                <input type="number" id="userMixW3" step="0.1" placeholder="შეიყვანეთ &omega;₃">
+                                <span class="field-unit">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive-btn-group">
+                        <button class="btn-check" onclick="checkMixingTask()">
+                            <i class="fa-solid fa-play"></i> შემოწმება და ხსნარების შერევა
+                        </button>
+                        <button class="btn-random" onclick="newMixingTask()">
+                            <i class="fa-solid fa-shuffle"></i> ახალი რიცხვები (სავარჯიშო)
+                        </button>
+                        <button class="btn-random" onclick="toggleCustomMixing()">
+                            <i class="fa-solid fa-pen-to-square"></i> საკუთარი რიცხვების შეყვანა
+                        </button>
+                    </div>
+
+                    <!-- Custom input fields for user-defined mixing task -->
+                    <div id="customMixBox" style="display: none; background: rgba(0,0,0,0.3); border: 1px dashed var(--border); padding: 14px; border-radius: 12px; margin-top: 5px;">
+                        <span style="font-size: 0.85rem; color: var(--primary); font-weight: bold; display: block; margin-bottom: 8px;">
+                            ⚙️ შეიყვანეთ თქვენი სასურველი მონაცემები:
+                        </span>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                            <input type="number" id="custMixM1" placeholder="m₁ (გრ)" value="100" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #050b14; color: #fff;">
+                            <input type="number" id="custMixW1" placeholder="&omega;₁ (%)" value="10" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #050b14; color: #fff;">
+                            <input type="number" id="custMixM2" placeholder="m₂ (გრ)" value="200" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #050b14; color: #fff;">
+                            <input type="number" id="custMixW2" placeholder="&omega;₂ (%)" value="25" style="padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #050b14; color: #fff;">
+                        </div>
+                        <button class="btn-check" style="margin-top: 10px; padding: 8px 16px; font-size: 0.85rem;" onclick="applyCustomMixing()">
+                            მონაცემების გამოყენება
+                        </button>
+                    </div>
+
+                    <div class="feedback-card" id="mixFeedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: INTERACTIVE QUIZ & TASK TRAINER -->
+        <section class="section-box">
+            <h2>
+                <i class="fa-solid fa-graduation-cap"></i> 5. ექსპრეს-ქვიზი და ამოცანების ტრენაჟორი
+            </h2>
+            
+            <div class="quiz-wrapper">
+                <div class="quiz-top-bar">
+                    <div class="quiz-progress-box">
+                        <span>ამოცანა <strong id="currentQNum">1</strong> / 6</span>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="quizProgressFill"></div>
+                        </div>
+                    </div>
+                    <div class="quiz-score-badge">
+                        ქულა: <span id="quizScore">0</span> / 6
+                    </div>
+                </div>
+
+                <div class="question-card" id="quizCard">
+                    <span class="question-badge" id="qBadge">ამოცანა 1: საბაზისო გამოთვლა</span>
+                    <p class="question-text" id="qText">
+                        25 გრამი სუფრის მარილი (NaCl) გახსნეს 225 გრამ წყალში. რისი ტოლია მარილის მასური წილი (&omega;) მიღებულ ხსნარში?
+                    </p>
+
+                    <div class="quiz-options-grid" id="qOptions"></div>
+                    <div class="quiz-feedback" id="qFeedback"></div>
+
+                    <div class="quiz-nav-row">
+                        <button class="btn-quiz-next" id="btnNextQ" onclick="nextQuestion()" style="display: none;">
+                            შემდეგი ამოცანა <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 ქიმიის ვირტუალური ლაბორატორია | <strong>მაია ქაჯაია</strong> | ანტიგრავიტაციული სასწავლო პლატფორმა</p>
+        </footer>
+    </div>
+
+    <!-- Interactive JavaScript Engine -->
+    <script>
+        /* ================= Sound Synthesizer (Web Audio API) ================= */
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) audioCtx = new AudioContext();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playTone(freq, type = 'sine', duration = 0.12, gainLevel = 0.1) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(gainLevel, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {
+                console.error("Audio error", e);
+            }
+        }
+
+        function playSciFiChime(isCorrect) {
+            if (!soundEnabled) return;
+            if (isCorrect) {
+                playTone(523.25, 'triangle', 0.1, 0.12);
+                setTimeout(() => playTone(659.25, 'triangle', 0.1, 0.12), 80);
+                setTimeout(() => playTone(783.99, 'triangle', 0.25, 0.15), 160);
+            } else {
+                playTone(260, 'sawtooth', 0.15, 0.12);
+                setTimeout(() => playTone(200, 'sawtooth', 0.25, 0.12), 120);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById("soundBtn");
+            const lbl = document.getElementById("soundLabel");
+            if (soundEnabled) {
+                lbl.innerText = "ხმა: ჩართულია";
+                btn.innerHTML = `<i class="fa-solid fa-volume-high"></i> <span id="soundLabel">ხმა: ჩართულია</span>`;
+                playTone(600, 'sine', 0.1);
+            } else {
+                lbl.innerText = "ხმა: გამორთულია";
+                btn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i> <span id="soundLabel">ხმა: გამორთულია</span>`;
+            }
+        }
+
+        /* ================= Section 1: Flask Simulator Logic ================= */
+        let state = {
+            solute: 20, // grams
+            water: 180  // grams
+        };
+
+        function updateSimulation() {
+            const mSolute = Math.max(0, parseFloat(state.solute) || 0);
+            const mWater = Math.max(1, parseFloat(state.water) || 1);
+            const mTotal = mSolute + mWater;
+            const omega = (mSolute / mTotal) * 100;
+
+            document.getElementById("statSolute").innerText = mSolute.toFixed(1).replace(/\.0$/, '') + " გრ";
+            document.getElementById("statWater").innerText = mWater.toFixed(1).replace(/\.0$/, '') + " გრ";
+            document.getElementById("statTotal").innerText = mTotal.toFixed(1).replace(/\.0$/, '') + " გრ";
+
+            document.getElementById("readoutOmega").innerText = omega.toFixed(2) + "%";
+
+            document.getElementById("fNumVal").innerText = mSolute.toFixed(1).replace(/\.0$/, '') + " გრ";
+            document.getElementById("fDenVal").innerText = mTotal.toFixed(1).replace(/\.0$/, '') + " გრ";
+            document.getElementById("fResVal").innerText = omega.toFixed(2) + "%";
+
+            const minHeight = 22;
+            const maxHeight = 88;
+            const heightPercent = Math.min(maxHeight, Math.max(minHeight, (mTotal / 400) * 80 + 15));
+            const liquidEl = document.getElementById("flaskLiquid");
+            liquidEl.style.height = heightPercent + "%";
+
+            let gradBottom, gradTop;
+            const statusEl = document.getElementById("readoutStatus");
+
+            if (omega <= 1) {
+                gradBottom = "rgba(0, 243, 255, 0.4)";
+                gradTop = "rgba(0, 180, 255, 0.2)";
+                statusEl.innerText = "ძალიან განზავებული ხსნარი";
+                statusEl.style.background = "rgba(0, 243, 255, 0.15)";
+                statusEl.style.borderColor = "var(--primary)";
+            } else if (omega <= 10) {
+                gradBottom = "rgba(0, 243, 255, 0.75)";
+                gradTop = "rgba(112, 0, 255, 0.45)";
+                statusEl.innerText = "ზომიერად განზავებული ხსნარი";
+                statusEl.style.background = "rgba(16, 185, 129, 0.2)";
+                statusEl.style.borderColor = "var(--success)";
+            } else if (omega <= 25) {
+                gradBottom = "rgba(112, 0, 255, 0.8)";
+                gradTop = "rgba(255, 0, 127, 0.55)";
+                statusEl.innerText = "კონცენტრირებული ხსნარი";
+                statusEl.style.background = "rgba(245, 158, 11, 0.2)";
+                statusEl.style.borderColor = "var(--warning)";
+            } else {
+                gradBottom = "rgba(255, 0, 127, 0.85)";
+                gradTop = "rgba(168, 85, 247, 0.7)";
+                statusEl.innerText = "მაღალკონცენტრირებული (ნაჯერობის ზღვარი)";
+                statusEl.style.background = "rgba(239, 68, 68, 0.25)";
+                statusEl.style.borderColor = "var(--danger)";
+            }
+
+            liquidEl.style.background = `linear-gradient(to top, ${gradBottom}, ${gradTop})`;
+        }
+
+        function syncSolute(val) {
+            val = Math.max(0, Math.min(150, parseFloat(val) || 0));
+            state.solute = val;
+            document.getElementById("numSolute").value = val;
+            document.getElementById("rangeSolute").value = val;
+            updateSimulation();
+            playTone(280 + val * 3, 'sine', 0.05, 0.04);
+        }
+
+        function syncWater(val) {
+            val = Math.max(20, Math.min(500, parseFloat(val) || 20));
+            state.water = val;
+            document.getElementById("numWater").value = val;
+            document.getElementById("rangeWater").value = val;
+            updateSimulation();
+            playTone(200 + (val / 5), 'sine', 0.05, 0.04);
+        }
+
+        function addWater(amount) {
+            syncWater(Math.min(500, state.water + amount));
+            playTone(440, 'triangle', 0.15, 0.08);
+        }
+
+        function addSolute(amount) {
+            syncSolute(Math.min(150, state.solute + amount));
+            playTone(550, 'triangle', 0.15, 0.08);
+        }
+
+        function evaporateWater(amount) {
+            if (state.water <= 30) return;
+            syncWater(Math.max(20, state.water - amount));
+            playTone(320, 'sawtooth', 0.15, 0.08);
+        }
+
+        function resetSim() {
+            state.solute = 20;
+            state.water = 180;
+            document.getElementById("numSolute").value = 20;
+            document.getElementById("rangeSolute").value = 20;
+            document.getElementById("numWater").value = 180;
+            document.getElementById("rangeWater").value = 180;
+            updateSimulation();
+            playTone(400, 'sine', 0.1);
+        }
+
+        function applyPreset(targetOmega, totalTargetMass = 100, name = '') {
+            const solute = (totalTargetMass * targetOmega) / 100;
+            const water = totalTargetMass - solute;
+            syncSolute(parseFloat(solute.toFixed(1)));
+            syncWater(parseFloat(water.toFixed(1)));
+            playTone(600, 'triangle', 0.15, 0.1);
+        }
+
+        /* ================= Section 2: Magic Triangle Solver ================= */
+        let activeTriTab = 'omega';
+
+        function switchTriTab(mode) {
+            activeTriTab = mode;
+            document.getElementById("tabOmega").classList.toggle("active", mode === 'omega');
+            document.getElementById("tabSolute").classList.toggle("active", mode === 'solute');
+            document.getElementById("tabSolution").classList.toggle("active", mode === 'solution');
+
+            document.getElementById("modeOmega").style.display = mode === 'omega' ? 'block' : 'none';
+            document.getElementById("modeSolute").style.display = mode === 'solute' ? 'block' : 'none';
+            document.getElementById("modeSolution").style.display = mode === 'solution' ? 'block' : 'none';
+
+            document.getElementById("nodeTop").classList.toggle("active", mode === 'omega');
+            document.getElementById("nodeLeft").classList.toggle("active", mode === 'solute');
+            document.getElementById("nodeRight").classList.toggle("active", mode === 'solution');
+
+            solveTriangle();
+            playTone(500, 'sine', 0.08, 0.06);
+        }
+
+        function solveTriangle() {
+            if (activeTriTab === 'omega') {
+                const mSolute = Math.max(0, parseFloat(document.getElementById("inSolute1").value) || 0);
+                const mWater = Math.max(0, parseFloat(document.getElementById("inWater1").value) || 0);
+                const mSol = mSolute + mWater;
+                const omega = mSol > 0 ? (mSolute / mSol) * 100 : 0;
+
+                document.getElementById("stepResult1").innerHTML = `
+                    <p><strong>ნაბიჯი 1:</strong> ხსნარის საერთო მასა = m(ნივთ) + m(წყალი) = ${mSolute} + ${mWater} = <strong>${mSol} გრ</strong></p>
+                    <p><strong>ნაბიჯი 2:</strong> &omega; = [m(ნივთ) &divide; m(ხსნ)] &times; 100% = [${mSolute} &divide; ${mSol}] &times; 100%</p>
+                    <p style="margin-top: 6px; font-size: 1.05rem; color: var(--primary);">
+                        &check; <strong>პასუხი: &omega; = ${omega.toFixed(2)}%</strong> (ათწილადით: ${(omega / 100).toFixed(4)})
+                    </p>
+                `;
+            } else if (activeTriTab === 'solute') {
+                const mSol = Math.max(0, parseFloat(document.getElementById("inSolution2").value) || 0);
+                const omega = Math.max(0, parseFloat(document.getElementById("inOmega2").value) || 0);
+                const mSolute = (mSol * omega) / 100;
+                const mWater = Math.max(0, mSol - mSolute);
+
+                document.getElementById("stepResult2").innerHTML = `
+                    <p><strong>ნაბიჯი 1:</strong> გახსნილი ნივთიერების მასა: m(ნივთ) = [m(ხსნ) &times; &omega;] &divide; 100%</p>
+                    <p>m(ნივთ) = [${mSol} &times; ${omega}%] &divide; 100% = <strong>${mSolute.toFixed(2)} გრ</strong></p>
+                    <p><strong>ნაბიჯი 2:</strong> საჭირო წყლის მასა = m(ხსნ) - m(ნივთ) = ${mSol} - ${mSolute.toFixed(2)} = <strong>${mWater.toFixed(2)} გრ (მლ)</strong></p>
+                    <p style="margin-top: 6px; font-size: 1.05rem; color: var(--accent);">
+                        &check; <strong>პასუხი: უნდა აიღოთ ${mSolute.toFixed(2)} გრ ნივთიერება და ${mWater.toFixed(2)} მლ წყალი</strong>
+                    </p>
+                `;
+            } else if (activeTriTab === 'solution') {
+                const mSolute = Math.max(0, parseFloat(document.getElementById("inSolute3").value) || 0);
+                const omega = Math.max(0.01, parseFloat(document.getElementById("inOmega3").value) || 1);
+                const mSol = (mSolute * 100) / omega;
+                const mWater = Math.max(0, mSol - mSolute);
+
+                document.getElementById("stepResult3").innerHTML = `
+                    <p><strong>ნაბიჯი 1:</strong> მიღებული ხსნარის მასა: m(ხსნ) = [m(ნივთ) &times; 100%] &divide; &omega;</p>
+                    <p>m(ხსნ) = [${mSolute} &times; 100%] &divide; ${omega}% = <strong>${mSol.toFixed(2)} გრ</strong></p>
+                    <p><strong>ნაბიჯი 2:</strong> დასამატებელი წყლის მასა: m(წყალი) = m(ხსნ) - m(ნივთ) = ${mSol.toFixed(2)} - ${mSolute} = <strong>${mWater.toFixed(2)} გრ (მლ)</strong></p>
+                    <p style="margin-top: 6px; font-size: 1.05rem; color: var(--primary);">
+                        &check; <strong>პასუხი: მიიღება ${mSol.toFixed(2)} გრ ხსნარი (საჭიროა ${mWater.toFixed(2)} მლ წყალი)</strong>
+                    </p>
+                `;
+            }
+        }
+
+        /* ================= Section 3: Dilution Logic & Laboratory Pouring Animation ================= */
+        let currentDiluteTask = {
+            m1: 200,
+            w1: 20,
+            mWater: 200
+        };
+
+        function setDilutionDisplay(m1, w1, mWater) {
+            currentDiluteTask = { m1, w1, mWater };
+            document.getElementById("dilutePromptM1").innerText = m1 + " გრ";
+            document.getElementById("dilutePromptW1").innerText = w1 + "%";
+            document.getElementById("dilutePromptWater").innerText = mWater + " გრ";
+
+            // Reset beaker visuals
+            document.getElementById("diluteLiquid").style.height = "40%";
+            document.getElementById("diluteLiquid").style.background = "linear-gradient(to top, rgba(255, 0, 127, 0.85), rgba(112, 0, 255, 0.6))";
+            document.getElementById("diluteBeakerLabel").innerText = `m₁=${m1}g, ω₁=${w1}%`;
+
+            document.getElementById("userDiluteM2").value = "";
+            document.getElementById("userDiluteW2").value = "";
+            document.getElementById("diluteFeedback").style.display = "none";
+        }
+
+        function newDilutionTask() {
+            const presets = [
+                { m1: 200, w1: 20, mWater: 200 }, // m2=400, w2=10%
+                { m1: 150, w1: 30, mWater: 150 }, // m2=300, w2=15%
+                { m1: 300, w1: 10, mWater: 100 }, // m2=400, w2=7.5%
+                { m1: 100, w1: 25, mWater: 150 }, // m2=250, w2=10%
+                { m1: 250, w1: 16, mWater: 150 }, // m2=400, w2=10%
+                { m1: 120, w1: 15, mWater: 60 }   // m2=180, w2=10%
+            ];
+            const p = presets[Math.floor(Math.random() * presets.length)];
+            setDilutionDisplay(p.m1, p.w1, p.mWater);
+            playTone(480, 'sine', 0.1);
+        }
+
+        function toggleCustomDilution() {
+            const box = document.getElementById("customDiluteBox");
+            box.style.display = box.style.display === "none" ? "block" : "none";
+        }
+
+        function applyCustomDilution() {
+            const m1 = parseFloat(document.getElementById("custDiluteM1").value) || 100;
+            const w1 = parseFloat(document.getElementById("custDiluteW1").value) || 10;
+            const mWater = parseFloat(document.getElementById("custDiluteWater").value) || 100;
+            setDilutionDisplay(m1, w1, mWater);
+            document.getElementById("customDiluteBox").style.display = "none";
+        }
+
+        function checkDilutionTask() {
+            const m1 = currentDiluteTask.m1;
+            const w1 = currentDiluteTask.w1;
+            const mWater = currentDiluteTask.mWater;
+
+            // Correct values
+            const correctM2 = m1 + mWater;
+            // From w1 * m1 = w2 * m2  =>  w2 = (w1 * m1) / m2
+            const correctW2 = (w1 * m1) / correctM2;
+
+            const userM2 = parseFloat(document.getElementById("userDiluteM2").value);
+            const userW2 = parseFloat(document.getElementById("userDiluteW2").value);
+
+            const feedback = document.getElementById("diluteFeedback");
+
+            if (isNaN(userM2) || isNaN(userW2)) {
+                feedback.className = "feedback-card wrong";
+                feedback.innerHTML = `<strong>⚠️ გთხოვთ, შეავსოთ ორივე ველი!</strong> ჩაწერეთ თქვენ მიერ გამოთვლილი ახალი ხსნარის მასა (m₂) და ახალი მასური წილი (ω₂).`;
+                feedback.style.display = "block";
+                playTone(250, 'sawtooth', 0.15);
+                return;
+            }
+
+            const m2Match = Math.abs(userM2 - correctM2) < 0.1;
+            const w2Match = Math.abs(userW2 - correctW2) < 0.15;
+
+            // Trigger laboratory pouring animation!
+            const pourFlask = document.getElementById("dilutePourFlask");
+            const stream = document.getElementById("diluteStream");
+            const beakerLiquid = document.getElementById("diluteLiquid");
+
+            pourFlask.classList.add("pouring");
+            setTimeout(() => {
+                stream.classList.add("active");
+                playTone(350, 'triangle', 0.8, 0.12);
+            }, 300);
+
+            setTimeout(() => {
+                // Raise fluid and dilute color
+                beakerLiquid.style.height = "78%";
+                beakerLiquid.style.background = "linear-gradient(to top, rgba(0, 243, 255, 0.7), rgba(56, 189, 248, 0.45))";
+                document.getElementById("diluteBeakerLabel").innerText = `m₂=${correctM2}g, ω₂=${correctW2.toFixed(1)}%`;
+            }, 600);
+
+            setTimeout(() => {
+                pourFlask.classList.remove("pouring");
+                stream.classList.remove("active");
+            }, 1200);
+
+            if (m2Match && w2Match) {
+                playSciFiChime(true);
+                feedback.className = "feedback-card correct";
+                feedback.innerHTML = `
+                    <p><strong><i class="fa-solid fa-circle-check"></i> ბრწყინვალეა! სწორად ამოხსენით:</strong></p>
+                    <p>&bull; ახალი ხსნარის საერთო მასა: <strong>m₂ = m₁ + m(წყალი) = ${m1} + ${mWater} = ${correctM2} გრ</strong></p>
+                    <p>&bull; ფორმულით <code>&omega;₁ &times; m₁ = &omega;₂ &times; m₂</code>:<br>
+                    <strong>&omega;₂ = (&omega;₁ &times; m₁) &divide; m₂ = (${w1}% &times; ${m1}) &divide; ${correctM2} = ${correctW2.toFixed(2)}%</strong></p>
+                    <p style="margin-top: 6px; color:#fff;">💧 წყლის დამატებით ხსნარი განზავდა და მისი კონცენტრაცია ${w1}%-დან შემცირდა ${correctW2.toFixed(1)}%-მდე.</p>
+                `;
+            } else {
+                playSciFiChime(false);
+                feedback.className = "feedback-card wrong";
+                feedback.innerHTML = `
+                    <p><strong><i class="fa-solid fa-triangle-exclamation"></i> პასუხი უზუსტოა. შეამოწმეთ ეტაპობრივი გამოთვლა:</strong></p>
+                    <p>1. ხსნარის ახალი მასა: <strong>m₂ = m₁ + m(წყალი) = ${m1} + ${mWater} = ${correctM2} გრ</strong></p>
+                    <p>2. ფორმულით: <strong>&omega;₂ = (&omega;₁ &times; m₁) &divide; m₂ = (${w1}% &times; ${m1}) &divide; ${correctM2} = ${correctW2.toFixed(2)}%</strong></p>
+                    <p style="margin-top: 6px;">სწორი პასუხებია: <strong>m₂ = ${correctM2} გრ</strong> და <strong>&omega;₂ = ${correctW2.toFixed(1)}%</strong>.</p>
+                `;
+            }
+            feedback.style.display = "block";
+        }
+
+        /* ================= Section 4: Mixing Two Solutions & Laboratory Vessels ================= */
+        let currentMixTask = {
+            m1: 100,
+            w1: 10,
+            m2: 300,
+            w2: 30
+        };
+
+        function setMixingDisplay(m1, w1, m2, w2) {
+            currentMixTask = { m1, w1, m2, w2 };
+            document.getElementById("mixPromptM1").innerText = m1 + " გრ";
+            document.getElementById("mixPromptW1").innerText = w1 + "%";
+            document.getElementById("mixPromptM2").innerText = m2 + " გრ";
+            document.getElementById("mixPromptW2").innerText = w2 + "%";
+
+            // Reset laboratory vessels
+            document.getElementById("mixSourceLeft").classList.remove("pouring");
+            document.getElementById("mixSourceRight").classList.remove("pouring");
+            document.getElementById("streamMixLeft").classList.remove("active");
+            document.getElementById("streamMixRight").classList.remove("active");
+            
+            document.getElementById("mixTargetLiquid").style.height = "15%";
+            document.getElementById("mixTargetLiquid").style.background = "rgba(255, 255, 255, 0.05)";
+            document.getElementById("mixTargetLabel").innerText = "ცარიელი ჭურჭელი";
+
+            document.getElementById("userMixM3").value = "";
+            document.getElementById("userMixW3").value = "";
+            document.getElementById("mixFeedback").style.display = "none";
+        }
+
+        function newMixingTask() {
+            const presets = [
+                { m1: 100, w1: 10, m2: 300, w2: 30 }, // m3=400, w3=25%
+                { m1: 200, w1: 15, m2: 300, w2: 25 }, // m3=500, w3=21%
+                { m1: 150, w1: 20, m2: 150, w2: 40 }, // m3=300, w3=30%
+                { m1: 100, w1: 5,  m2: 400, w2: 15 }, // m3=500, w3=13%
+                { m1: 250, w1: 12, m2: 250, w2: 28 }, // m3=500, w3=20%
+                { m1: 200, w1: 10, m2: 200, w2: 20 }  // m3=400, w3=15%
+            ];
+            const p = presets[Math.floor(Math.random() * presets.length)];
+            setMixingDisplay(p.m1, p.w1, p.m2, p.w2);
+            playTone(480, 'sine', 0.1);
+        }
+
+        function toggleCustomMixing() {
+            const box = document.getElementById("customMixBox");
+            box.style.display = box.style.display === "none" ? "block" : "none";
+        }
+
+        function applyCustomMixing() {
+            const m1 = parseFloat(document.getElementById("custMixM1").value) || 100;
+            const w1 = parseFloat(document.getElementById("custMixW1").value) || 10;
+            const m2 = parseFloat(document.getElementById("custMixM2").value) || 200;
+            const w2 = parseFloat(document.getElementById("custMixW2").value) || 25;
+            setMixingDisplay(m1, w1, m2, w2);
+            document.getElementById("customMixBox").style.display = "none";
+        }
+
+        function checkMixingTask() {
+            const m1 = currentMixTask.m1;
+            const w1 = currentMixTask.w1;
+            const m2 = currentMixTask.m2;
+            const w2 = currentMixTask.w2;
+
+            const correctM3 = m1 + m2;
+            // Formula: w1 * m1 + w2 * m2 = w3 * m3 => w3 = (w1*m1 + w2*m2) / m3
+            const solute1 = (w1 * m1) / 100;
+            const solute2 = (w2 * m2) / 100;
+            const totalSolute = solute1 + solute2;
+            const correctW3 = (totalSolute / correctM3) * 100;
+
+            const userM3 = parseFloat(document.getElementById("userMixM3").value);
+            const userW3 = parseFloat(document.getElementById("userMixW3").value);
+            const feedback = document.getElementById("mixFeedback");
+
+            if (isNaN(userM3) || isNaN(userW3)) {
+                feedback.className = "feedback-card wrong";
+                feedback.innerHTML = `<strong>⚠️ გთხოვთ, შეავსოთ ორივე ველი!</strong> ჩაწერეთ ნარევის მასა (m₃) და საბოლოო მასური წილი (ω₃).`;
+                feedback.style.display = "block";
+                playTone(250, 'sawtooth', 0.15);
+                return;
+            }
+
+            const m3Match = Math.abs(userM3 - correctM3) < 0.1;
+            const w3Match = Math.abs(userW3 - correctW3) < 0.2;
+
+            // Trigger two beakers pouring animation!
+            const bLeft = document.getElementById("mixSourceLeft");
+            const bRight = document.getElementById("mixSourceRight");
+            const sLeft = document.getElementById("streamMixLeft");
+            const sRight = document.getElementById("streamMixRight");
+            const targetLiquid = document.getElementById("mixTargetLiquid");
+
+            bLeft.classList.add("pouring");
+            bRight.classList.add("pouring");
+
+            setTimeout(() => {
+                sLeft.classList.add("active");
+                sRight.classList.add("active");
+                playTone(400, 'triangle', 0.8, 0.15);
+            }, 300);
+
+            setTimeout(() => {
+                targetLiquid.style.height = "82%";
+                targetLiquid.style.background = "linear-gradient(to top, rgba(112, 0, 255, 0.85), rgba(255, 0, 127, 0.6))";
+                document.getElementById("mixTargetLabel").innerText = `m₃=${correctM3}g, ω₃=${correctW3.toFixed(1)}%`;
+            }, 650);
+
+            setTimeout(() => {
+                bLeft.classList.remove("pouring");
+                bRight.classList.remove("pouring");
+                sLeft.classList.remove("active");
+                sRight.classList.remove("active");
+            }, 1250);
+
+            if (m3Match && w3Match) {
+                playSciFiChime(true);
+                feedback.className = "feedback-card correct";
+                feedback.innerHTML = `
+                    <p><strong><i class="fa-solid fa-circle-check"></i> ყოჩაღ! თქვენი გამოთვლა აბსოლუტურად სწორია:</strong></p>
+                    <p>&bull; ნარევის საერთო მასა: <strong>m₃ = m₁ + m₂ = ${m1} + ${m2} = ${correctM3} გრ</strong></p>
+                    <p>&bull; 1-ლ ხსნარში სუფთა ნივთიერება: <strong>m(ნივთ₁) = (${m1} &times; ${w1}%) / 100 = ${solute1.toFixed(1)} გრ</strong></p>
+                    <p>&bull; მე-2 ხსნარში სუფთა ნივთიერება: <strong>m(ნივთ₂) = (${m2} &times; ${w2}%) / 100 = ${solute2.toFixed(1)} გრ</strong></p>
+                    <p>&bull; ფორმულით <code>&omega;₁m₁ + &omega;₂m₂ = &omega;₃m₃</code>:<br>
+                    <strong>&omega;₃ = (${w1}% &times; ${m1} + ${w2}% &times; ${m2}) &divide; ${correctM3} = ${correctW3.toFixed(2)}%</strong></p>
+                `;
+            } else {
+                playSciFiChime(false);
+                feedback.className = "feedback-card wrong";
+                feedback.innerHTML = `
+                    <p><strong><i class="fa-solid fa-triangle-exclamation"></i> პასუხი უზუსტოა. გადახედეთ სწორ მსვლელობას:</strong></p>
+                    <p>1. ნარევის მასა: <strong>m₃ = m₁ + m₂ = ${m1} + ${m2} = ${correctM3} გრ</strong></p>
+                    <p>2. სულ სუფთა ნივთიერება: <strong>${solute1.toFixed(1)} გრ + ${solute2.toFixed(1)} გრ = ${totalSolute.toFixed(1)} გრ</strong></p>
+                    <p>3. <strong>&omega;₃ = (${totalSolute.toFixed(1)} &divide; ${correctM3}) &times; 100% = ${correctW3.toFixed(2)}%</strong></p>
+                    <p style="margin-top: 6px;">სწორი პასუხებია: <strong>m₃ = ${correctM3} გრ</strong> და <strong>&omega;₃ = ${correctW3.toFixed(1)}%</strong>.</p>
+                `;
+            }
+            feedback.style.display = "block";
+        }
+
+        /* ================= Section 5: Quiz & Challenge Trainer ================= */
+        const quizData = [
+            {
+                badge: "ამოცანა 1: საბაზისო გამოთვლა",
+                text: "25 გრამი სუფრის მარილი (NaCl) გახსნეს 225 გრამ წყალში. რისი ტოლია მარილის მასური წილი (&omega;) მიღებულ ხსნარში?",
+                options: [
+                    "5%",
+                    "10%",
+                    "11.1%",
+                    "25%"
+                ],
+                correct: 1,
+                explain: "ხსნარის სრული მასა = 25 გრ (მარილი) + 225 გრ (წყალი) = 250 გრ. მასური წილი ω = (25 / 250) × 100% = 10%."
+            },
+            {
+                badge: "ამოცანა 2: მედიცინა და აფთიაქი",
+                text: "საავადმყოფოს სჭირდება 500 გრამი 0.9%-იანი ფიზიოლოგიური ხსნარი. რამდენი გრამი NaCl (მარილი) და რამდენი გრამი წყალია საჭირო?",
+                options: [
+                    "4.5 გრ მარილი და 495.5 გრ წყალი",
+                    "9 გრ მარილი და 491 გრ წყალი",
+                    "0.9 გრ მარილი და 499.1 გრ წყალი",
+                    "45 გრ მარილი და 455 გრ წყალი"
+                ],
+                correct: 0,
+                explain: "m(NaCl) = (500 × 0.9%) / 100% = 4.5 გრ. წყლის მასა m(H₂O) = 500 - 4.5 = 495.5 გრ."
+            },
+            {
+                badge: "ამოცანა 3: ხსნარის განზავება წყლით (ω₁m₁ = ω₂m₂)",
+                text: "200 გრამ 20%-იან შაქრის ხსნარს დაუმატეს კიდევ 200 გრამი სუფთა წყალი. როგორი გახდა მიღებული ხსნარის მასური წილი?",
+                options: [
+                    "20%",
+                    "15%",
+                    "10%",
+                    "5%"
+                ],
+                correct: 2,
+                explain: "თავდაპირველად შაქარი იყო: (200 × 20%) / 100 = 40 გრ. წყლის დამატების შემდეგ ხსნარის ახალი მასა m₂ = 200 + 200 = 400 გრ. ახალი ω₂ = (40 / 400) × 100% = 10% (ხსნარი ორჯერ განზავდა!)."
+            },
+            {
+                badge: "ამოცანა 4: ნივთიერების დამატება",
+                text: "150 გრამ 10%-იან მარილხსნარს დაუმატეს 15 გრამი მშრალი მარილი. რისი ტოლი გახდა ახალი მასური წილი?",
+                options: [
+                    "18.18%",
+                    "20.00%",
+                    "15.00%",
+                    "25.00%"
+                ],
+                correct: 0,
+                explain: "თავდაპირველი მარილი = 150 × 10% = 15 გრ. დამატების შემდეგ სულ მარილი = 15 + 15 = 30 გრ. ახალი ხსნარის მასა = 150 + 15 = 165 გრ. ω = (30 / 165) × 100% = 18.18%."
+            },
+            {
+                badge: "ამოცანა 5: წყლის აორთქლება (კონცენტრირება)",
+                text: "600 გრამ 5%-იან ხსნარს გაცხელებით ააორთქლეს 300 გრამი წყალი. რისი ტოლი გახდა დარჩენილი ხსნარის მასური წილი?",
+                options: [
+                    "7.5%",
+                    "10%",
+                    "12.5%",
+                    "15%"
+                ],
+                correct: 1,
+                explain: "ნივთიერების მასა = (600 × 5%) / 100 = 30 გრ (ის არ ორთქლდება). დარჩენილი ხსნარის მასა = 600 - 300 = 300 გრ. ახალი ω = (30 / 300) × 100% = 10%."
+            },
+            {
+                badge: "ამოცანა 6: ხსნარების შერევა (ω₁m₁ + ω₂m₂ = ω₃m₃)",
+                text: "ერთმანეთს შეურიეს 100 გრ 10%-იანი და 300 გრ 30%-იანი ხსნარი. გამოთვალეთ ნარევის მასური წილი:",
+                options: [
+                    "20%",
+                    "22.5%",
+                    "25%",
+                    "27.5%"
+                ],
+                correct: 2,
+                explain: "m₁(ნივთ) = 10 გრ; m₂(ნივთ) = 90 გრ. სულ ნივთიერება = 10 + 90 = 100 გრ. სულ ხსნარი m₃ = 100 + 300 = 400 გრ. ω₃ = (100 / 400) × 100% = 25%."
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        function loadQuestion(idx) {
+            answered = false;
+            const q = quizData[idx];
+            document.getElementById("currentQNum").innerText = idx + 1;
+            document.getElementById("quizProgressFill").style.width = ((idx + 1) / quizData.length * 100) + "%";
+            document.getElementById("qBadge").innerText = q.badge;
+            document.getElementById("qText").innerHTML = q.text;
+
+            const optsBox = document.getElementById("qOptions");
+            optsBox.innerHTML = "";
+            const letters = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, oIdx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerHTML = `<span class="option-marker">${letters[oIdx]}</span> <span>${opt}</span>`;
+                btn.onclick = () => selectOption(oIdx);
+                optsBox.appendChild(btn);
+            });
+
+            const feed = document.getElementById("qFeedback");
+            feed.className = "quiz-feedback";
+            feed.style.display = "none";
+            feed.innerHTML = "";
+
+            document.getElementById("btnNextQ").style.display = "none";
+        }
+
+        function selectOption(selectedIdx) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizData[currentQuizIndex];
+            const isCorrect = selectedIdx === q.correct;
+            const optButtons = document.querySelectorAll(".option-btn");
+
+            optButtons.forEach((btn, idx) => {
+                btn.classList.add("disabled");
+                if (idx === q.correct) {
+                    btn.classList.add("correct");
+                } else if (idx === selectedIdx) {
+                    btn.classList.add("wrong");
+                }
+            });
+
+            const feed = document.getElementById("qFeedback");
+            if (isCorrect) {
+                score++;
+                document.getElementById("quizScore").innerText = score;
+                playSciFiChime(true);
+                feed.className = "quiz-feedback correct-box";
+                feed.innerHTML = `<strong><i class="fa-solid fa-circle-check"></i> სწორია! ყოჩაღ!</strong><br>${q.explain}`;
+            } else {
+                playSciFiChime(false);
+                feed.className = "quiz-feedback wrong-box";
+                feed.innerHTML = `<strong><i class="fa-solid fa-circle-xmark"></i> არასწორია.</strong><br>${q.explain}`;
+            }
+            feed.style.display = "block";
+
+            const nextBtn = document.getElementById("btnNextQ");
+            if (currentQuizIndex < quizData.length - 1) {
+                nextBtn.innerHTML = `შემდეგი ამოცანა <i class="fa-solid fa-arrow-right"></i>`;
+            } else {
+                nextBtn.innerHTML = `შედეგების შეჯამება <i class="fa-solid fa-trophy"></i>`;
+            }
+            nextBtn.style.display = "inline-flex";
+        }
+
+        function nextQuestion() {
+            if (currentQuizIndex < quizData.length - 1) {
+                currentQuizIndex++;
+                loadQuestion(currentQuizIndex);
+                playTone(480, 'sine', 0.08);
+            } else {
+                showQuizSummary();
+            }
+        }
+
+        function showQuizSummary() {
+            const card = document.getElementById("quizCard");
+            const percent = Math.round((score / quizData.length) * 100);
+            let feedbackMsg = "";
+            let trophyColor = "var(--primary)";
+
+            if (percent === 100) {
+                feedbackMsg = "ბრწყინვალეა! თქვენ უმაღლეს დონეზე ფლობთ მასური წილის ყველა ტიპის ამოცანას!";
+                trophyColor = "#facc15";
+            } else if (percent >= 65) {
+                feedbackMsg = "ძალიან კარგი შედეგია! მასური წილის ძირითადი პრინციპები კარგად გაქვთ ათვისებული.";
+                trophyColor = "var(--primary)";
+            } else {
+                feedbackMsg = "გირჩევთ კიდევ ერთხელ გადახედოთ ფორმულის სამკუთხედს და სცადოთ თავიდან.";
+                trophyColor = "var(--accent)";
+            }
+
+            card.innerHTML = `
+                <div style="text-align: center; padding: 25px 10px;">
+                    <i class="fa-solid fa-trophy" style="font-size: 3.5rem; color: ${trophyColor}; margin-bottom: 15px; filter: drop-shadow(0 0 15px ${trophyColor});"></i>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 10px; color: #fff;">ქვიზი დასრულებულია!</h3>
+                    <p style="font-size: 1.25rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; color: var(--primary);">
+                        თქვენი შედეგი: ${score} / ${quizData.length} (${percent}%)
+                    </p>
+                    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 24px; line-height: 1.6;">
+                        ${feedbackMsg}
+                    </p>
+                    <button class="btn-quiz-next" style="margin: 0 auto;" onclick="restartQuiz()">
+                        <i class="fa-solid fa-rotate-left"></i> თავიდან დაწყება
+                    </button>
+                </div>
+            `;
+            playTone(600, 'triangle', 0.2);
+            setTimeout(() => playTone(800, 'triangle', 0.3), 150);
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            score = 0;
+            document.getElementById("quizScore").innerText = "0";
+            
+            const card = document.getElementById("quizCard");
+            card.innerHTML = `
+                <span class="question-badge" id="qBadge"></span>
+                <p class="question-text" id="qText"></p>
+                <div class="quiz-options-grid" id="qOptions"></div>
+                <div class="quiz-feedback" id="qFeedback"></div>
+                <div class="quiz-nav-row">
+                    <button class="btn-quiz-next" id="btnNextQ" onclick="nextQuestion()" style="display: none;">
+                        შემდეგი ამოცანა <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            `;
+            loadQuestion(0);
+        }
+
+        /* ================= Init on page load ================= */
+        window.addEventListener("DOMContentLoaded", () => {
+            updateSimulation();
+            solveTriangle();
+            setDilutionDisplay(200, 20, 200);
+            setMixingDisplay(100, 10, 300, 30);
+            loadQuestion(0);
+        });
+    </script>
+</body>
+</html>
